@@ -3,8 +3,7 @@ describe('A Primus polling connection', function () {
   var spark;
 
   beforeEach(function (done) {
-    spark = Primus.connect({
-      url: 'http://test.articulate.io:3000',
+    spark = Primus.connect('http://test.articulate.io:3000', {
       transformer: 'engine.io',
       websockets: false
     });
@@ -51,7 +50,7 @@ describe('A Primus polling connection', function () {
 
   it('should handle multiple messages', function (done) {
     var responses = 0;
-    var messages = 15;
+    var messages = 10;
     var interval;
 
     spark.on('data', function (data) {
