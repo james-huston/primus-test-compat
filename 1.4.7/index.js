@@ -28,7 +28,8 @@ var primus = new Primus(
   server,
   {
     transformer: 'engine.io',
-    parser: 'json'
+    parser: 'json',
+    transports: ['polling', 'websockets']
   }
 );
 

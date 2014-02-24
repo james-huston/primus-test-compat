@@ -29,7 +29,7 @@
     "expect": "0.0.2",
     "express-cors-options": "0.0.4",
     "primus": "~1.4.7",
-    "engine.io": "~0.6.2"
+    "engine.io": "git+ssh://git@github.com:3rd-Eden/engine.io.git"
   },
   "devDependencies": {
     "should": "~3.1.2",

@@ -81,6 +81,6 @@ describe('A Primus polling connection', function () {
       } else {
         clearInterval(interval);
       }
-    }, 20);
+    }, 100);
   });
 });

@@ -22,6 +22,10 @@
   <script>
     mocha.checkLeaks();
     mocha.run();
+
+    setTimeout(function () {
+      mocha.run();
+    }, 10000);
   </script>
 </body>
 </html>
