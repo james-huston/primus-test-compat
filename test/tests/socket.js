@@ -4,7 +4,7 @@ describe('A Primus socket connection', function () {
 
   beforeEach(function (done) {
     spark = Primus.connect({
-      url: 'http://echobox.articulate.io:3000',
+      url: 'http://test.articulate.io:3000',
       transformer: 'engine.io'
     });
 
