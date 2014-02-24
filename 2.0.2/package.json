@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/james-huston/primus-test-compat",
   "dependencies": {
-    "primus": "~2.0.2",
-    "engine.io": "~0.9.0",
+    "primus": "2.0.2",
+    "engine.io": "git+https://github.com/3rd-Eden/engine.io.git",
     "express": "~3.4.8",
     "debug": "~0.7.4",
     "proxywrap": "~0.2.0",
