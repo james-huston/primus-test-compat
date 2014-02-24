@@ -11,7 +11,7 @@ describe('A Primus socket connection', function () {
     spark.on('open', function () {
       setTimeout(function () {
         done();
-      }, 500);
+      }, 1000);
     });
   });
 

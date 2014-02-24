@@ -3,14 +3,15 @@ var express = require('express');
 var Primus = require('primus');
 var debug = require('debug')('testserver');
 var http = require('http');
+var cors = require('express-cors-options');
 var proxiedHttp = require('proxywrap').proxy(http, {strict: false});
 var app = express();
 var server = module.exports = proxiedHttp.createServer(app);
 
 // app.use(express.logger());
 // app.use(express.directory(__dirname + '/test'));
+app.user(cors);
 app.use('/', express.static(__dirname + '/test'));
-
 /*
  * Errors!
  */

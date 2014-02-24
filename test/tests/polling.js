@@ -50,17 +50,19 @@ describe('A Primus polling connection', function () {
   });
 
   it('should handle multiple messages', function (done) {
-    this.timeout(6000);
     var responses = 0;
+    var messages = 15;
     var interval;
 
     spark.on('data', function (data) {
       responses++;
+      console.log('received', responses);
+
       if (data.direction !== 'out') {
         return done(new Error('invalid direction'));
       }
 
-      if (responses === 10) {
+      if (responses === messages) {
         clearInterval(interval);
         done();
       }
@@ -69,8 +71,9 @@ describe('A Primus polling connection', function () {
     var requests = 0;
     interval = setInterval(function () {
       requests++;
+      console.log('send', requests);
 
-      if (requests <= 10) {
+      if (requests <= messages) {
         spark.write({
           direction: 'in',
           message: 'request ' + requests
@@ -78,6 +81,6 @@ describe('A Primus polling connection', function () {
       } else {
         clearInterval(interval);
       }
-    }, 50);
+    }, 20);
   });
 });
