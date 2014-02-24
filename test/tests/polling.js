@@ -50,7 +50,7 @@ describe('A Primus polling connection', function () {
   });
 
   it('should handle multiple messages', function (done) {
-    this.timeout(4000);
+    this.timeout(6000);
     var responses = 0;
     var interval;
 
