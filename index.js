@@ -10,7 +10,7 @@ var server = module.exports = proxiedHttp.createServer(app);
 
 // app.use(express.logger());
 // app.use(express.directory(__dirname + '/test'));
-app.user(cors);
+app.use(cors);
 app.use('/', express.static(__dirname + '/test'));
 /*
  * Errors!
