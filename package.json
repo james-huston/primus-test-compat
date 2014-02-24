@@ -1,0 +1,37 @@
+{
+  "name": "primus-test-compat",
+  "version": "0.1.0",
+  "description": "Test library for checking browser compatibility for Primus.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --require should --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/james-huston/primus-test-compat.git"
+  },
+  "keywords": [
+    "primus",
+    "test",
+    "browser",
+    "compatibility"
+  ],
+  "author": "James Huston <james@jameshuston.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/james-huston/primus-test-compat/issues"
+  },
+  "homepage": "https://github.com/james-huston/primus-test-compat",
+  "dependencies": {
+    "primus": "~2.0.2",
+    "engine.io": "~0.9.0",
+    "express": "~3.4.8",
+    "debug": "~0.7.4",
+    "proxywrap": "~0.2.0",
+    "expect": "0.0.2"
+  },
+  "devDependencies": {
+    "should": "~3.1.2",
+    "mocha": "~1.17.1"
+  }
+}
