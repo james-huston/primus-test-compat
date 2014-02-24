@@ -6,6 +6,7 @@ describe('A Primus socket connection', function () {
   beforeEach(function (done) {
     spark = Primus.connect(window.testing.endpoint, {
       transformer: 'engine.io'
+      // , websockets: false
     });
 
     spark.on('open', function () {
