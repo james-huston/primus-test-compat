@@ -10,10 +10,10 @@ var server = module.exports = proxiedHttp.createServer(app);
 // app.use(express.logger());
 // app.use(express.directory(__dirname + '/test'));
 
-// var options = {
-//   origin: '*'
-// };
-// app.use(require('express-cors-options')(options));
+var options = {
+  origin: '*'
+};
+app.use(require('express-cors-options')(options));
 
 app.use('/', express.static(__dirname + '/../test'));
 

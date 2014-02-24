@@ -1,18 +1,19 @@
 
 describe('A Primus polling connection', function () {
+  this.timeout(4000);
   var spark;
 
   beforeEach(function (done) {
-    spark = Primus.connect('http://test.articulate.io:3000', {
-      transformer: 'engine.io',
-      websockets: false
+    spark = Primus.connect(window.testing.endpoint, {
+      transformer: 'engine.io'
+      , websockets: false
     });
 
     spark.on('open', function () {
-      console.log('connected');
+      console.log('connected', spark.version);
       setTimeout(function () {
         done();
-      }, 100);
+      }, 1000);
     });
   });
 
@@ -50,7 +51,7 @@ describe('A Primus polling connection', function () {
 
   it('should handle multiple messages', function (done) {
     var responses = 0;
-    var messages = 15;
+    var messages = 10;
     var interval;
 
     spark.on('data', function (data) {
@@ -70,9 +71,9 @@ describe('A Primus polling connection', function () {
     var requests = 0;
     interval = setInterval(function () {
       requests++;
-      console.log('send', requests);
 
       if (requests <= messages) {
+        console.log('send', requests);
         spark.write({
           direction: 'in',
           message: 'request ' + requests

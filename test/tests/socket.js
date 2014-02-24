@@ -1,13 +1,15 @@
 
 describe('A Primus socket connection', function () {
+  this.timeout(4000);
   var spark;
 
   beforeEach(function (done) {
-    spark = Primus.connect('http://test.articulate.io:3000', {
+    spark = Primus.connect(window.testing.endpoint, {
       transformer: 'engine.io'
     });
 
     spark.on('open', function () {
+      console.log('connected', spark.version);
       setTimeout(function () {
         done();
       }, 1000);
