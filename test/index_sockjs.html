@@ -10,14 +10,20 @@
   <script src="/primus/primus.js"></script>
   <script src="/support/mocha.js"></script>
   <script>
+    if(!window.console.log) {
+      window.console.log = function () {};
+    }
+
     mocha.setup('bdd');
     window.testing = {
-      endpoint: 'http://localhost:3000'
+      endpoint: 'http://test.articulate.io:3000',
+      transformer: 'sockjs'
     }
   </script>
 
-  <script src="/tests/socket.js"></script>
   <script src="/tests/polling.js"></script>
+  <script src="/tests/socket.js"></script>
+  <script src="/tests/connections.js"></script>
 
   <script>
     mocha.checkLeaks();
@@ -38,6 +44,7 @@
     // setTimeout(function () {
     //   mocha.run();
     // }, 20000);
+
   </script>
 </body>
 </html>

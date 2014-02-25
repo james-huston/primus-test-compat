@@ -5,7 +5,7 @@ describe('A Primus polling connection', function () {
 
   beforeEach(function (done) {
     spark = Primus.connect(window.testing.endpoint, {
-      transformer: 'engine.io'
+      transformer: window.testing.transformer
       , websockets: false
     });
 
@@ -35,6 +35,21 @@ describe('A Primus polling connection', function () {
   });
 
   it('should get a message back', function (done) {
+    spark.on('data', function (data) {
+      if (data.direction !== 'out') {
+        return done(new Error('invalid direction'));
+      }
+
+      done();
+    });
+
+    spark.write({
+      direction: 'in',
+      message: 'default send message'
+    });
+  });
+
+  it('should get a message back a second time', function (done) {
     spark.on('data', function (data) {
       if (data.direction !== 'out') {
         return done(new Error('invalid direction'));

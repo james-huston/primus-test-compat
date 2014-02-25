@@ -5,7 +5,7 @@ describe('A Primus socket connection', function () {
 
   beforeEach(function (done) {
     spark = Primus.connect(window.testing.endpoint, {
-      transformer: 'engine.io'
+      transformer: window.testing.transformer
       // , websockets: false
     });
 
@@ -33,6 +33,41 @@ describe('A Primus socket connection', function () {
     done(new Error('invalid readystate'));
   });
 
+  it('should handle multiple messages', function (done) {
+    var responses = 0;
+    var messages = 10;
+    var interval;
+
+    spark.on('data', function (data) {
+      responses++;
+      console.log('socket received', responses);
+
+      if (data.direction !== 'out') {
+        return done(new Error('invalid direction'));
+      }
+
+      if (responses === messages) {
+        clearInterval(interval);
+        done();
+      }
+    });
+
+    var requests = 0;
+    interval = setInterval(function () {
+      requests++;
+
+      if (requests <= messages) {
+        console.log('socket send', requests);
+        spark.write({
+          direction: 'in',
+          message: 'request ' + requests
+        });
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+  });
+
   it('should get a message back', function (done) {
     spark.on('data', function (data) {
       if (data.direction !== 'out') {
@@ -48,29 +83,19 @@ describe('A Primus socket connection', function () {
     });
   });
 
-  it('should handle multiple messages', function (done) {
-    var responses = 0;
-    var interval;
-
+  it('should get a message back a second time', function (done) {
     spark.on('data', function (data) {
-      responses++;
       if (data.direction !== 'out') {
         return done(new Error('invalid direction'));
       }
 
-      if (responses === 10) {
-        clearInterval(interval);
-        done();
-      }
+      done();
     });
 
-    var requests = 0;
-    interval = setInterval(function () {
-      requests++;
-      spark.write({
-        direction: 'in',
-        message: 'request ' + requests
-      });
-    }, 50);
+    spark.write({
+      direction: 'in',
+      message: 'default send message'
+    });
   });
+
 });
